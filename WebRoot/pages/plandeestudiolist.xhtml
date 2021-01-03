@@ -1,0 +1,196 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Plandeestudio</title>
+	<meta http-equiv="keywords" content="enter,your,keywords,here" />
+	<meta http-equiv="description"
+		content="A short description of this page." />
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<style>
+.barsearch {
+	height: 14px;
+	width: 100px;
+}
+
+.barsearchbutton {
+	border-width: 1px;
+	background-color: #{
+	a4jSkin.generalBackgroundColor
+}
+;
+}
+</style>
+</h:head>
+<ui:composition template="../templates/template.xhtml">
+	<ui:define name="ibody">
+
+		<p:fieldset legend="#{msgs.nuevoplan}" toggleable="true"
+			collapsed="true" id="filset" widgetVar="fil" toggleSpeed="100">
+
+			<h:form>
+				<p:panel id="panelplan" header="#{msgs.insertar}">
+
+					<h:panelGrid id="estudiodisplay" columns="3">
+
+
+						<h:outputLabel for="planestudio" value="#{msgs.plandeestudio} *" />
+						<p:inputText id="planestudio"
+							value="#{plandeestudiobean.plandeestudio.nombreplan}"
+							required="true" requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Planestudio">
+						</p:inputText>
+						<p:message for="planestudio" display="icon" showSummary="false" />
+
+						<h:outputText value="#{msgs.cantperiodos}" />
+						<p:spinner value="#{plandeestudiobean.plandeestudio.cantperiodos}"
+							min="1"  max="2"/>
+						<h:outputText value="" />
+
+						<h:outputText value="#{msgs.cantannos}" />
+						<p:spinner value="#{plandeestudiobean.plandeestudio.cantannos}"
+							min="1" max="6" />
+						<h:outputText value="" />
+
+						<h:outputText value="#{msgs.nombcarrera}" />
+						<h:selectOneMenu
+							value="#{plandeestudiobean.plandeestudio.codcarrera}"
+							style="font-weight:bold">
+							<f:selectItems value="#{carrerabean.carreraItems}" />
+						</h:selectOneMenu>
+
+
+					</h:panelGrid>
+
+					<p:commandButton action="#{plandeestudiobean.addPlandeestudio()}"
+						value="#{msgs.insertar}" update="panelplan" />
+				</p:panel>
+			</h:form>
+		</p:fieldset>
+
+		<h:form id="formdatatable">
+			<div align="center" style="padding-top: 0">
+
+
+				<!-- Programacion del Datatable	 -->
+				<p:dataTable value="#{plandeestudiobean.allPlandeestudio}"
+					var="plandeestudio" rows="20" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" id="tablePlandeestudio">
+					<f:facet name="header">
+						<h:outputText value="#{msgs.listplanEst}" />
+					</f:facet>
+
+					<p:column sortBy="#{plandeestudio.nombreplan}"
+						filterBy="#{plandeestudio.nombreplan}" filterEvent="onkeyup"
+						label="#{msgs.nombreplan}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nombreplan}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{plandeestudio.nombreplan}"
+								id="columnnombreplan" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{plandeestudio.cantperiodos}"
+						filterBy="#{plandeestudio.cantperiodos}" filterEvent="onkeyup"
+						label="#{msgs.cantperiodos}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.cantperiodos}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{plandeestudio.cantperiodos}"
+								id="columncantperiodos" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{plandeestudio.cantannos}"
+						filterBy="#{plandeestudio.cantannos}" filterEvent="onkeyup"
+						label="#{msgs.cantannos}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.cantannos}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{plandeestudio.cantannos}"
+								id="columncantannos" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{plandeestudio.carrera.nombcarrera}"
+						filterBy="#{plandeestudio.carrera.nombcarrera}" filterEvent="onkeyup"
+						label="#{msgs.codcarrera}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nombcarrera}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{plandeestudio.carrera.nombcarrera}"
+								id="columncodcarrera" />
+						</div>
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.modificar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="editlink" action="modificarplandeestudio"
+								oncomplete="plandeestudioDialogUpdate.show()"
+								icon="ui-icon-update" title="#{msgs.modificar}">
+								<f:setPropertyActionListener value="#{plandeestudio}"
+									target="#{controllerbean.plandeestudio}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="editlink" value="#{msgs.modificar}" />
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.eliminar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="deletelink"
+								oncomplete="planDialogDelete.show()" icon="ui-icon-trash"
+								update=":formdelete:eliminardialog" title="#{msgs.eliminar}">
+								<f:setPropertyActionListener value="#{plandeestudio}"
+									target="#{plandeestudiobean.plandeestudio}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="deletelink" value="#{msgs.eliminar}" />
+					</p:column>
+
+				</p:dataTable>
+			</div>
+		</h:form>
+
+		<p:dialog appendToBody="true"
+			header="#{msgs.eliminar} #{plandeestudiobean.plandeestudio.nombreplan}"
+			severity="alert" widgetVar="planDialogDelete">
+			<h:outputText value="#{msgs.estaseguro}" />
+			<h:form id="formdelete">
+				<h:panelGrid id="eliminardialog" columns="3">
+					<h:inputHidden
+						value="#{plandeestudiobean.plandeestudio.codplanest}" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<p:commandButton id="confirm" value="Si"
+						action="#{plandeestudiobean.deletePlandeestudio()}"
+						onclick="carreraDialogDelete.hide()" />
+
+					<p:commandButton id="decline" value="No"
+						onclick="planDialogDelete.hide()" type="button" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>
+</html>
+

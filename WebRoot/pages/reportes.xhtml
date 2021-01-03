@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<head>
+<title>"titulo"</title>
+<meta http-equiv="keywords" content="enter,your,keywords,here" />
+<meta http-equiv="description"
+	content="A short description of this page." />
+<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+
+<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+</head>
+<body>
+	<ui:composition template="../templates/template.xhtml">
+		<ui:define name="ibody">
+
+
+			<h:form id="repo">
+				<h:panelGrid columns="3">
+
+
+
+					<h:outputText value="#{msgs.asignaturasconunaevalu}" />
+
+					<h:selectOneMenu value="#{asignaturabean.asignatura.codevaluacion}"
+						style="font-weight:bold" id="evalu">
+						<f:selectItems value="#{evaluacionbean.evaluacionItems}" />
+					</h:selectOneMenu>
+
+					<h:commandLink id="pdfExporter02"
+						action="#{reports.valorEvaluacion()}">
+						<f:setPropertyActionListener target="#{reports.reportType}"
+							value="pdf" />
+						<f:setPropertyActionListener target="#{reports.directory}"
+							value="/reportes/Evalu.jasper" />
+						<h:graphicImage value="/images/PDF.png"
+							style="border: none; width: 43px; height: 43px" />
+					</h:commandLink>
+
+
+
+					<h:outputText value="#{msgs.malla}" />
+					<h:selectOneMenu value="#{carrerabean.carrera.codcarrera}"
+						style="font-weight:bold" id="mallareport">
+						<f:selectItems value="#{carrerabean.carreraItems}" />
+					</h:selectOneMenu>
+
+					<h:commandLink id="pdfExporter03" action="#{reports.valorMalla()}">
+						<f:setPropertyActionListener target="#{reports.reportType}"
+							value="pdf" />
+						<f:setPropertyActionListener target="#{reports.directory}"
+							value="/reportes/malla.jasper" />
+						<h:graphicImage value="/images/PDF.png"
+							style="border: none; width: 43px; height: 43px" />
+					</h:commandLink>
+
+
+					<h:outputText value="#{msgs.AsignaturasPrece}" />
+
+					<h:selectOneMenu value="#{asignaturabean.asignatura.codasig}"
+						style="font-weight:bold" id="pre">
+						<f:selectItems value="#{asignaturabean.asignaturaItems}" />
+					</h:selectOneMenu>
+
+					<h:commandLink id="pdfExporter05" action="#{reports.Precedente()}">
+						<f:setPropertyActionListener target="#{reports.reportType}"
+							value="pdf" />
+						<f:setPropertyActionListener target="#{reports.directory}"
+							value="/reportes/Precedente.jasper" />
+						<h:graphicImage value="/images/PDF.png"
+							style="border: none; width: 43px; height: 43px" />
+					</h:commandLink>
+
+
+					<h:outputText value="#{msgs.programanalitico}" />
+
+					<h:selectOneMenu value="#{asignaturabean.asignatura.codasig}"
+						style="font-weight:bold" id="programa">
+						<f:selectItems value="#{asignaturabean.asignaturaItems}" />
+					</h:selectOneMenu>
+
+					<h:commandLink id="pdfExporter06"
+						action="#{reports.ProgramaAnalitico()}">
+						<f:setPropertyActionListener target="#{reports.reportType}"
+							value="pdf" />
+						<f:setPropertyActionListener target="#{reports.directory}"
+							value="/reportes/ProgramaAnali.jasper" />
+						<h:graphicImage value="/images/PDF.png"
+							style="border: none; width: 43px; height: 43px" />
+					</h:commandLink>
+					
+					<h:outputText value="#{msgs.planmetodologico}" />
+
+					<h:selectOneMenu value="#{asignaturabean.asignatura.codasig}"
+						style="font-weight:bold" id="plan">
+						<f:selectItems value="#{asignaturabean.asignaturaItems}" />
+					</h:selectOneMenu>
+
+					<h:commandLink id="pdfExporter08"
+						action="#{reports.Plan()}">
+						<f:setPropertyActionListener target="#{reports.reportType}"
+							value="pdf" />
+						<f:setPropertyActionListener target="#{reports.directory}"
+							value="/reportes/Plan.jasper" />
+						<h:graphicImage value="/images/PDF.png"
+							style="border: none; width: 43px; height: 43px" />
+					</h:commandLink>
+					
+
+
+
+					<h:outputText value="#{msgs.secactividad}" />
+
+					<h:selectOneMenu value="#{asignaturabean.asignatura.codasig}"
+						style="font-weight:bold" id="secuencia">
+						<f:selectItems value="#{asignaturabean.asignaturaItems}" />
+					</h:selectOneMenu>
+
+					<h:commandLink id="pdfExporter07"
+						action="#{reports.SecuenciaActi()}">
+						<f:setPropertyActionListener target="#{reports.reportType}"
+							value="pdf" />
+						<f:setPropertyActionListener target="#{reports.directory}"
+							value="/reportes/SecAct.jasper" />
+						<h:graphicImage value="/images/PDF.png"
+							style="border: none; width: 43px; height: 43px" />
+					</h:commandLink>
+
+
+				</h:panelGrid>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

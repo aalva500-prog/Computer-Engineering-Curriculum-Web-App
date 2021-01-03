@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Carrera</title>
+	<meta http-equiv="keywords" content="enter,your,keywords,here" />
+	<meta http-equiv="description"
+		content="A short description of this page." />
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<style>
+.barsearch {
+	height: 14px;
+	width: 100px;
+}
+
+.barsearchbutton {
+	border-width: 1px;
+	background-color: #{
+	a4jSkin.generalBackgroundColor
+}
+;
+}
+</style>
+</h:head>
+<ui:composition template="../templates/template.xhtml">
+	<ui:define name="ibody">
+
+		<p:fieldset legend="#{msgs.nuevacarrera}" toggleable="true" collapsed="true"
+			id="filset" widgetVar="fil" toggleSpeed="100">
+
+			<h:form id="insercarrera">
+
+				<p:panel id="panelcarrera" header="#{msgs.insertar}">
+
+					<p:panelGrid columns="3">
+
+						<h:outputLabel for="firstname" value="#{msgs.carrera} *" />
+						<p:inputText id="firstname"
+							value="#{carrerabean.carrera.nombcarrera}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Firstname">
+						</p:inputText>
+						<p:message for="firstname" display="icon" showDetail="mmmm"
+							showSummary="false" />
+
+
+
+						<h:outputText value="#{msgs.facultad}" />
+						<h:selectOneMenu value="#{carrerabean.carrera.idfacultad}"
+							style="font-weight:bold">
+							<f:selectItems value="#{facultadbean.facultadItems}" />
+						</h:selectOneMenu>
+
+
+
+					</p:panelGrid>
+					<p:commandButton id="btn" value="#{msgs.insertar}" update="panelcarrera"
+						action="#{carrerabean.addCarrera()}" />
+
+
+
+				</p:panel>
+
+
+			</h:form>
+		</p:fieldset>
+
+
+		<h:form id="formdatatable">
+			<div align="center" style="padding-top: 0">
+
+				<!-- Programacion del Datatable	 -->
+				<p:dataTable value="#{carrerabean.allCarrera}" var="carrera"
+					rows="20" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" id="tableCarrera">
+					<f:facet name="header">
+						<h:outputText value="#{msgs.listadocarrera}" />
+					</f:facet>
+
+					<p:column sortBy="#{carrera.nombcarrera}"
+						filterBy="#{carrera.nombcarrera}" filterEvent="onkeyup"
+						label="#{msgs.nombcarrera}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nombcarrera}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{carrera.nombcarrera}"
+								id="columnnombcarrera" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{carrera.facultad.nombfacultad}"
+						filterBy="#{carrera.facultad.nombfacultad}" filterEvent="onkeyup"
+						label="#{msgs.facultad}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.facultad}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{carrera.facultad.nombfacultad}"
+								id="columnidfacultad" />
+						</div>
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.modificar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="editlink" action="modificarcarrera"
+								icon="ui-icon-update" title="#{msgs.modificar}">
+								<f:setPropertyActionListener value="#{carrera}"
+									target="#{controllerbean.carrera}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="editlink" value="#{msgs.modificar}" />
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.eliminar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="deletelink"
+								oncomplete="carreraDialogDelete.show()" icon="ui-icon-trash"
+								update=":formdelete:eliminardialog" title="#{msgs.eliminar}">
+								<f:setPropertyActionListener value="#{carrera}"
+									target="#{carrerabean.carrera}" />
+							</p:commandButton>
+						</div>
+
+						<p:tooltip for="deletelink" value="#{msgs.eliminar}" />
+					</p:column>
+
+				</p:dataTable>
+			</div>
+		</h:form>
+
+
+		<p:dialog appendToBody="true"
+			header="#{msgs.eliminar} #{carrerabean.carrera.nombcarrera}"
+			severity="alert" widgetVar="carreraDialogDelete">
+			<h:outputText value="#{msgs.estaseguro}" />
+			<h:form id="formdelete">
+				<h:panelGrid id="eliminardialog" columns="3">
+					<h:inputHidden value="#{carrerabean.carrera.codcarrera}" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<p:commandButton id="confirm" value="Si"
+						action="#{carrerabean.deleteCarrera()}"
+						onclick="carreraDialogDelete.hide()" />
+
+					<p:commandButton id="decline" value="No"
+						onclick="carreraDialogDelete.hide()" type="button" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+
+	</ui:define>
+</ui:composition>
+</html>
+

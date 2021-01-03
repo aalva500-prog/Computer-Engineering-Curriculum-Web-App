@@ -1,0 +1,49 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="../templates/template.xhtml">
+		<ui:define name="ibody">
+
+
+			<h:form id="modificarfacultad">
+
+				<p:panel id="modfacultad" header="#{msgs.modFacult}">
+
+					<p:panelGrid columns="3">
+
+						<h:outputLabel for="nombfacultad" value="#{msgs.facultad} *" />
+						<p:inputText id="nombfacultad"
+							value="#{controllerbean.facultad.nombfacultad}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Nombfacultad">
+						</p:inputText>
+						<p:message for="nombfacultad" display="icon" showDetail="mmmm"
+							showSummary="false" />
+
+						<h:outputLabel for="nombdecano" value="#{msgs.nombdecano}*" />
+						<p:inputText id="nombdecano"
+							value="#{controllerbean.facultad.nombdecano}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Nombdecano">
+						</p:inputText>
+						<p:message for="nombdecano" display="icon" showDetail="mmmm"
+							showSummary="false" />
+
+					</p:panelGrid>
+					<p:commandButton id="btn" value="#{msgs.Actualizar}"
+							action="#{facultadbean.updateFacultad()}" update="modfacultad">
+							<f:setPropertyActionListener value="#{controllerbean.facultad}"
+								target="#{facultadbean.facultad}" />
+						</p:commandButton>
+				</p:panel>
+			</h:form>
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

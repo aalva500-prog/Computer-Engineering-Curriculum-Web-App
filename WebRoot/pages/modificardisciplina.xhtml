@@ -1,0 +1,71 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="../templates/template.xhtml">
+		<ui:define name="ibody">
+
+
+			<h:form id="insertdisci">
+
+				<p:panel id="modidisciplina" header="#{msgs.modDisciplina}">
+
+					<h:panelGrid id="carrdisplay" columns="3" cellpadding="4"
+						style="margin:0 auto;">
+
+						<h:outputText value="" />
+						<h:inputHidden value="#{controllerbean.disciplina.coddisciplina}" />
+						<h:outputText value="" />
+
+
+						<h:outputLabel for="nombdisciplina" value="#{msgs.disciplina} *" />
+						<p:inputText id="nombdisciplina"
+							value="#{controllerbean.disciplina.nombredisciplin}"
+							required="true" style="font-weight:bold"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Nombdisciplina">
+
+						</p:inputText>
+
+						<p:message for="nombdisciplina" display="icon" showDetail="mmmm"
+							showSummary="false" />
+
+
+
+						<h:outputLabel for="jefedisciplina" value="#{msgs.jefedisciplin} *" />
+						<p:inputText id="jefedisciplina"
+							value="#{controllerbean.disciplina.jefedisciplin}"
+							required="true" style="font-weight:bold"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Jefedisciplina">
+						</p:inputText>
+						<p:message for="jefedisciplina" display="icon" showDetail="mmmm"
+							showSummary="false" />
+
+
+						<h:outputText value="#{msgs.canthoras}" />
+						<p:spinner value="#{controllerbean.disciplina.canthorastotales}"
+							min="0" />
+						<h:outputText value="" />
+
+
+
+
+					</h:panelGrid>
+					<p:commandButton action="#{disciplinabean.updateDisciplina()}"
+						value="#{msgs.Actualizar}" update="modidisciplina">
+						<f:setPropertyActionListener value="#{controllerbean.disciplina}"
+							target="#{disciplinabean.disciplina}" />
+					</p:commandButton>
+				</p:panel>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

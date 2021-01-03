@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Asignatura</title>
+	<meta http-equiv="keywords" content="enter,your,keywords,here" />
+	<meta http-equiv="description"
+		content="A short description of this page." />
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	
+</h:head>
+<ui:composition template="../templates/template.xhtml">
+	<ui:define name="ibody">
+		<p:fieldset legend="#{msgs.nuevaAsig}" toggleable="true"
+			collapsed="true" id="filset" widgetVar="fil" toggleSpeed="100">
+
+
+
+			<h:form id="insertarasignatura">
+
+				<p:panel id="panelasignatura" header="#{msgs.insertar}">
+
+					<h:panelGrid id="asigdisplay" columns="3">
+
+
+						<h:panelGrid columns="3">
+							<h:outputText value="#{msgs.nombreasig} *" />
+							<p:inputText id="firstname"
+								value="#{asignaturabean.asignatura.nombreasig}" required="true"
+								requiredMessage="#{msgs.debe}"
+								onkeypress="return permite(event,'car');" label="Firstname">
+							</p:inputText>
+							<p:message for="firstname" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+							<h:outputText value="#{msgs.jefeasig} *" />
+							<p:inputText id="jefename"
+								value="#{asignaturabean.asignatura.jefeasig}" required="true"
+								requiredMessage="#{msgs.debe}"
+								onkeypress="return permite(event,'car');" label="Firstname">
+							</p:inputText>
+							<p:message for="jefename" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+
+
+
+							<h:outputText value="#{msgs.periodo}" />
+							<p:spinner value="#{asignaturabean.asignatura.periodo}" min="0" max="2" />
+							<h:outputText value="" />
+
+
+							<h:outputText value="#{msgs.canthoras}"/>
+							<p:spinner value="#{asignaturabean.asignatura.canthoras}" min="0" />
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.anno}"/>
+							<p:spinner value="#{asignaturabean.asignatura.anno}" min="0" max= "6"/>
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.disciplina}"/>
+							<h:selectOneMenu
+								value="#{asignaturabean.asignatura.coddisciplina}">
+								<f:selectItems value="#{disciplinabean.disciplinaItems}"/>
+							</h:selectOneMenu>
+							<h:outputText value=""/>
+
+							<h:outputText value="#{msgs.precedente}"/>
+							<h:selectOneMenu value="#{asignaturabean.asignatura.codasigpre}">
+								<f:selectItems value="#{asignaturabean.asignaturaItems}"/>
+							</h:selectOneMenu>
+							<h:outputText value=""/>
+
+							<h:outputText value="#{msgs.evaluacion}"/>
+							<h:selectOneMenu
+								value="#{asignaturabean.asignatura.codevaluacion}">
+								<f:selectItems value="#{evaluacionbean.evaluacionItems}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+
+
+
+
+						</h:panelGrid>
+						<h:panelGrid columns="3">
+
+							<h:outputText value="#{msgs.curriculo}" />
+							<h:selectOneMenu
+								value="#{asignaturabean.asignatura.codcurriculo}">
+								<f:selectItems value="#{curriculobean.curriculoItems}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.plandeestudio}" />
+							<h:selectOneMenu value="#{asignaturabean.asignatura.codplanest}">
+								<f:selectItems value="#{plandeestudiobean.plandeestudioItems}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+
+
+
+
+
+							<h:outputLabel for="secactivi" value="#{msgs.secactividad}" />
+							<p:inputTextarea id="secactivi"
+								value="#{asignaturabean.asignatura.secactividad}"
+								required="true" requiredMessage="#{msgs.debe}"
+								label="Firstname">
+							</p:inputTextarea>
+							<p:message for="secactivi" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+
+							<h:outputLabel for="planmeto" value="#{msgs.planmetodologico}" />
+							<p:inputTextarea id="planmeto"
+								value="#{asignaturabean.asignatura.planmetodologico}"
+								required="true" requiredMessage="#{msgs.debe}"
+								label="Firstname">
+							</p:inputTextarea>
+							<p:message for="planmeto" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+							<h:outputLabel for="proanaliti" value="#{msgs.programanalitico}" />
+							<p:inputTextarea id="proanaliti"
+								value="#{asignaturabean.asignatura.programanalitico}"
+								required="true" requiredMessage="#{msgs.debe}"
+								label="Firstname">
+							</p:inputTextarea>
+							<p:message for="proanaliti" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+						</h:panelGrid>
+
+					</h:panelGrid>
+
+					<p:commandButton action="#{asignaturabean.addAsignatura()}"
+						value="Insertar" update="panelasignatura" />
+
+				</p:panel>
+			</h:form>
+		</p:fieldset>
+
+
+		<h:form id="formdatatable">
+			<div align="center" style="padding-top: 0">
+
+				<!-- Programacion del Datatable	 -->
+				<p:dataTable value="#{asignaturabean.allAsignatura}"
+					var="asignatura" rows="20" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" id="tableAsignatura">
+					<f:facet name="header">
+						<h:outputText value="#{msgs.listadoasignatura}" />
+					</f:facet>
+
+					<p:column sortBy="#{asignatura.nombreasig}"
+						filterBy="#{asignatura.nombreasig}" filterEvent="onkeyup"
+						label="#{msgs.nombreasig}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nombreasig}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{asignatura.nombreasig}"
+								id="columnnombreasig" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{asignatura.jefeasig}"
+						filterBy="#{asignatura.jefeasig}" filterEvent="onkeyup"
+						label="#{msgs.jefeasig}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.jefeasig}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{asignatura.jefeasig}" id="columnjefeasig" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{asignatura.anno}" filterBy="#{asignatura.anno}"
+						filterEvent="onkeyup" label="#{msgs.anno}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.anno}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{asignatura.anno}" id="columnanno" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{asignatura.periodo}"
+						filterBy="#{asignatura.periodo}" filterEvent="onkeyup"
+						label="#{msgs.periodo}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.periodo}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{asignatura.periodo}" id="columnperiodo" />
+						</div>
+					</p:column>
+
+
+
+
+					<p:column sortBy="#{asignatura.plandeestudio.nombreplan}"
+						filterBy="#{asignatura.plandeestudio.nombreplan}" filterEvent="onkeyup"
+						label="#{msgs.codplanest}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.codplanest}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{asignatura.plandeestudio.nombreplan}"
+								id="columncodplanest" />
+						</div>
+					</p:column>
+
+
+					<p:column sortBy="#{asignatura.disciplina.nombredisciplin}"
+						filterBy="#{asignatura.disciplina.nombredisciplin}" filterEvent="onkeyup"
+						label="#{msgs.coddisciplina}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.coddisciplina}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{asignatura.disciplina.nombredisciplin}"
+								id="columncoddisciplina" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{asignatura.curriculo.tipocurriculo}"
+						filterBy="#{asignatura.curriculo.tipocurriculo}" filterEvent="onkeyup"
+						label="#{msgs.codcurriculo}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.codcurriculo}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{asignatura.curriculo.tipocurriculo}"
+								id="columncodcurriculo" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{asignatura.canthoras}"
+						filterBy="#{asignatura.canthoras}" filterEvent="onkeyup"
+						label="#{msgs.canthoras}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.canthoras}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{asignatura.canthoras}"
+								id="columncanthoras" />
+						</div>
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.modificar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="editlink" action="modificarasignatura"
+								oncomplete="asignaturaDialogUpdate.show()" icon="ui-icon-update"
+								title="#{msgs.modificar}">
+								<f:setPropertyActionListener value="#{asignatura}"
+									target="#{controllerbean.asignatura}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="editlink" value="#{msgs.modificar}" />
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.eliminar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="deletelink"
+								oncomplete="asignaturaDialogDelete.show()" icon="ui-icon-trash"
+								update=":formdelete:eliminardialog" title="#{msgs.eliminar}">
+								<f:setPropertyActionListener value="#{asignatura}"
+									target="#{asignaturabean.asignatura}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="deletelink" value="#{msgs.eliminar}" />
+					</p:column>
+
+				</p:dataTable>
+			</div>
+		</h:form>
+
+
+		<p:dialog appendToBody="true"
+			header="#{msgs.eliminar} #{asignaturabean.asignatura.nombreasig}"
+			severity="alert" widgetVar="asignaturaDialogDelete">
+			<h:outputText value="#{msgs.estaseguro}" />
+			<h:form id="formdelete">
+				<h:panelGrid id="eliminardialog" columns="3">
+					<h:inputHidden value="#{asignaturabean.asignatura.codasig}" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<p:commandButton id="confirm" value="Si"
+						action="#{asignaturabean.deleteAsignatura()}"
+						onclick="asignaturaDialogDelete.hide()" />
+
+					<p:commandButton id="decline" value="No"
+						onclick="asignaturaDialogDelete.hide()" type="button" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>
+</html>
+

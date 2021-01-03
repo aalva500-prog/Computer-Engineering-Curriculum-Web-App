@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html	xmlns="http://www.w3.org/1999/xhtml" dir="ltr" xml:lang="en" 
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:p="http://primefaces.org/ui">
+
+	<f:view locale="#{localeBean.locale}" contentType="text/html" encoding="UTF-8">
+		<h:head>
+			<title>Malla Curricular</title>
+			<script type="text/javascript" src="../js/validation.js"></script>	
+			<meta http-equiv="keywords" content="enter,your,keywords,here"/>
+			<meta http-equiv="description" content="A short description of this page."/>
+			<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+			<link rel="stylesheet" href="../css/style.css" type="text/css" media="screen"/>
+		</h:head>
+		<body>
+			<div id="art-page-background-middle-texture">
+				<div id="art-main">
+					<div class="art-sheet">
+						<div class="art-sheet-tl"></div>
+						<div class="art-sheet-tr"></div>
+						<div class="art-sheet-bl"></div>
+						<div class="art-sheet-br"></div>
+						<div class="art-sheet-tc"></div>
+						<div class="art-sheet-bc"></div>
+						<div class="art-sheet-cl"></div>
+						<div class="art-sheet-cr"></div>
+						<div class="art-sheet-cc"></div>
+						<div class="art-sheet-body">
+							<div class="art-header">
+								<div class="art-header-png"></div>
+								<div class="art-logo">
+									<h1 id="name-text" class="art-logo-name">
+										<h:outputText value="#{msgs.malla}"/> 
+									</h1>
+								</div>
+							</div>
+								
+							<div class="art-content-layout">
+								<div class="art-content-layout-row">
+									<div class="art-layout-cell art-content">
+										<div class="art-post">
+											<div class="art-post-body">
+												<div class="art-post-inner art-article">
+													<div class="art-postcontent">
+														<div align="center">
+															<ui:insert name="ibody"></ui:insert>
+														</div>
+													</div>
+													<div class="cleared"></div>
+												</div>
+												<div class="cleared"></div>
+											</div>
+										</div>
+			
+									</div>
+								</div>
+							</div>
+							
+							<div class="cleared"></div>
+							<div class="art-footer">
+								<div class="art-footer-t"></div>
+								<div class="art-footer-l"></div>
+								<div class="art-footer-b"></div>
+								<div class="art-footer-r"></div>
+								<div class="art-footer-body">
+									<div class="art-footer-text">
+										<div align="center">
+											<h:form>
+												<p:commandLink action="#{localeBean.changeLocale}" ajax="false" value="Español">
+													<f:setPropertyActionListener target="#{localeBean.language}" value="es" />
+												</p:commandLink>
+												<p:commandLink action="#{localeBean.changeLocale}" ajax="false" value="English">
+													<f:setPropertyActionListener target="#{localeBean.language}" value="en" />
+												</p:commandLink>
+											</h:form>	
+											</div>
+										<p>Copyright 2012. All Rights Reserved.</p>
+									</div>
+										<div class="cleared"></div>
+								</div>
+							</div>
+							<div class="cleared"></div>
+						</div>
+					</div>
+					<div class="cleared"></div>
+					<p class="art-page-footer"></p>
+				</div>
+			</div>
+		</body>
+	</f:view>
+</html>

@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="../templates/template.xhtml">
+		<ui:define name="ibody">
+
+
+			<h:form id="modificarasignatura">
+
+				<p:panel id="panelasignatura" header="#{msgs.modificarAsignatura}">
+
+					<h:panelGrid id="asigdisplay" columns="3">
+
+
+
+						<h:panelGrid columns="3">
+							<h:outputText value="" />
+							<h:inputHidden value="#{controllerbean.asignatura.codasig}" />
+							<h:outputText value="" />
+
+
+							<h:outputLabel for="nombasig" value="#{msgs.asignatura} *" />
+							<p:inputText id="nombasig"
+								value="#{controllerbean.asignatura.nombreasig}" required="true"
+								requiredMessage="#{msgs.debe}"
+								onkeypress="return permite(event,'car');" label="Nombasig">
+							</p:inputText>
+							<p:message for="nombasig" display="icon" showSummary="false" />
+
+							<h:outputLabel for="nombjefe" value="#{msgs.jefeasig} *" />
+							<p:inputText id="nombjefe"
+								value="#{controllerbean.asignatura.jefeasig}" required="true"
+								requiredMessage="#{msgs.debe}"
+								onkeypress="return permite(event,'car');" label="Nombjefe">
+							</p:inputText>
+							<p:message for="nombjefe" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+
+							<h:outputText value="#{msgs.periodo}" />
+							<p:spinner value="#{controllerbean.asignatura.periodo}" min="0"  max="2"/>
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.canthoras}" />
+							<p:spinner value="#{controllerbean.asignatura.canthoras}" min="0" />
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.anno}" />
+							<p:spinner value="#{controllerbean.asignatura.anno}" min="0" max="6" />
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.disciplina}" />
+							<h:selectOneMenu
+								value="#{controllerbean.asignatura.coddisciplina}"
+								style="font-weight:bold">
+								<f:selectItems value="#{disciplinabean.disciplinaItems}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.precedente}" />
+							<h:selectOneMenu value="#{controllerbean.asignatura.codasigpre}"
+								style="font-weight:bold">
+								<f:selectItems value="#{asignaturabean.asignaturaItems}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.evaluacion}" />
+							<h:selectOneMenu
+								value="#{controllerbean.asignatura.codevaluacion}"
+								style="font-weight:bold">
+								<f:selectItems value="#{evaluacionbean.evaluacionItems}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+
+
+
+
+
+
+						</h:panelGrid>
+
+
+
+
+
+						<h:panelGrid columns="3">
+
+							<h:outputText value="#{msgs.curriculo}" />
+							<h:selectOneMenu
+								value="#{controllerbean.asignatura.codcurriculo}"
+								style="font-weight:bold">
+								<f:selectItems value="#{curriculobean.curriculoItems}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+
+							<h:outputText value="#{msgs.plandeestudio}" />
+							<h:selectOneMenu value="#{controllerbean.asignatura.codplanest}"
+								style="font-weight:bold">
+								<f:selectItems value="#{plandeestudiobean.plandeestudioItems}" />
+							</h:selectOneMenu>
+							<h:outputText value="" />
+
+							<h:outputLabel for="secactivi" value="#{msgs.secactividad}" />
+							<p:inputTextarea id="secactivi"
+								value="#{controllerbean.asignatura.secactividad}"
+								required="true" requiredMessage="Debe llenar el campo"
+								label="Secactivi">
+							</p:inputTextarea>
+							<p:message for="secactivi" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+
+
+							<h:outputLabel for="planmeto" value="#{msgs.planmetodologico}" />
+							<p:inputTextarea id="planmeto"
+								value="#{controllerbean.asignatura.planmetodologico}"
+								required="true" requiredMessage="Debe llenar el campo"
+								label="Planmeto">
+							</p:inputTextarea>
+							<p:message for="planmeto" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+
+							<h:outputLabel for="proanaliti" value="#{msgs.programanalitico}" />
+							<p:inputTextarea id="proanaliti"
+								value="#{controllerbean.asignatura.programanalitico}"
+								required="true" requiredMessage="Debe llenar el campo"
+								label="Proanaliti">
+							</p:inputTextarea>
+							<p:message for="proanaliti" display="icon" showDetail="mmmm"
+								showSummary="false" />
+
+
+
+						</h:panelGrid>
+
+
+
+					</h:panelGrid>
+					<p:commandButton action="#{asignaturabean.updateAsignatura()}"
+						value="#{msgs.Actualizar}" update="panelasignatura">
+						<f:setPropertyActionListener value="#{controllerbean.asignatura}"
+							target="#{asignaturabean.asignatura}" />
+					</p:commandButton>
+
+
+
+				</p:panel>
+
+
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

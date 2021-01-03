@@ -1,0 +1,169 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Facultad</title>
+	<meta http-equiv="keywords" content="enter,your,keywords,here" />
+	<meta http-equiv="description"
+		content="A short description of this page." />
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<style>
+.barsearch {
+	height: 14px;
+	width: 100px;
+}
+
+.barsearchbutton {
+	border-width: 1px;
+	background-color: #{
+	a4jSkin.generalBackgroundColor
+}
+;
+}
+</style>
+</h:head>
+<ui:composition template="../templates/template.xhtml">
+	<ui:define name="ibody">
+
+		<p:fieldset legend="#{msgs.nuevaFacul}" toggleable="true" collapsed="true"
+			id="filset" widgetVar="fil" toggleSpeed="100">
+
+			<h:form id="inserfacultad">
+
+				<p:panel id="panel" header="#{msgs.insertar}">
+
+					<p:panelGrid columns="3">
+
+						<h:outputLabel for="nombfacultad" value="#{msgs.facultad} *" />
+						<p:inputText id="nombfacultad"
+							value="#{facultadbean.facultad.nombfacultad}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Nombfacultad">
+						</p:inputText>
+						<p:message for="nombfacultad" display="icon" showSummary="false" />
+
+						<h:outputLabel for="nombdecano" value="#{msgs.nombdecano}*" />
+						<p:inputText id="nombdecano"
+							value="#{facultadbean.facultad.nombdecano}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Nombdecano">
+						</p:inputText>
+						<p:message for="nombdecano" display="icon" showSummary="false" />
+					</p:panelGrid>
+
+
+					<p:commandButton id="btn" value="#{msgs.insertar}" update="panel"
+						action="#{facultadbean.addFacultad()}" />
+				</p:panel>
+
+
+			</h:form>
+		</p:fieldset>
+
+
+		<h:form id="formdatatable">
+			<div align="center" style="padding-top: 0">
+
+				<!-- Programacion del Datatable	 -->
+				<p:dataTable value="#{facultadbean.allFacultad}" var="facultad"
+					rows="20" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" id="tableFacultad">
+					<f:facet name="header">
+						<h:outputText value="#{msgs.listadofacultad}" />
+					</f:facet>
+
+
+
+
+					<p:column sortBy="#{facultad.nombfacultad}"
+						filterBy="#{facultad.nombfacultad}" filterEvent="onkeyup"
+						label="#{msgs.nombfacultad}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nombfacultad}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{facultad.nombfacultad}"
+								id="columnnombfacultad" />
+						</div>
+					</p:column>
+					
+					<p:column sortBy="#{facultad.nombdecano}"
+						filterBy="#{facultad.nombdecano}" filterEvent="onkeyup"
+						label="#{msgs.nombdecano}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nombdecano}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{facultad.nombdecano}"
+								id="columnnombdecano" />
+						</div>
+					</p:column>
+
+
+
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.modificar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="editlink" action="modificarfacultad"
+								icon="ui-icon-update" title="#{msgs.modificar}">
+								<f:setPropertyActionListener value="#{facultad}"
+									target="#{controllerbean.facultad}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="editlink" value="#{msgs.modificar}" />
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.eliminar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="deletelink"
+								oncomplete="facultadDialogDelete.show()" icon="ui-icon-trash"
+								update=":formdelete:eliminardialog" title="#{msgs.eliminar}">
+								<f:setPropertyActionListener value="#{facultad}"
+									target="#{facultadbean.facultad}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="deletelink" value="#{msgs.eliminar}" />
+					</p:column>
+
+				</p:dataTable>
+			</div>
+		</h:form>
+
+
+		<p:dialog appendToBody="true"
+			header="#{msgs.eliminar} #{facultadbean.facultad.nombfacultad}"
+			severity="alert" widgetVar="facultadDialogDelete">
+			<h:outputText value="#{msgs.estaseguro}" />
+			<h:form id="formdelete">
+				<h:panelGrid id="eliminardialog" columns="3">
+					<h:inputHidden value="#{facultadbean.facultad.idfacultad}" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<p:commandButton id="confirm" value="Si"
+						action="#{facultadbean.deleteFacultad()}"
+						onclick="facultadDialogDelete.hide()" />
+
+					<p:commandButton id="decline" value="No"
+						onclick="facultadDialogDelete.hide()" type="button" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>
+</html>
+

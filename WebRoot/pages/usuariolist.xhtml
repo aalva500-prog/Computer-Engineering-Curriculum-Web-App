@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Usuario</title>
+	<meta http-equiv="keywords" content="enter,your,keywords,here" />
+	<meta http-equiv="description"
+		content="A short description of this page." />
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<style>
+.barsearch {
+	height: 14px;
+	width: 100px;
+}
+
+.barsearchbutton {
+	border-width: 1px;
+	background-color: #{ a4jSkin.generalBackgroundColor
+}
+;
+}
+</style>
+</h:head>
+<ui:composition template="../templates/template.xhtml">
+	<ui:define name="ibody">
+	
+	<p:fieldset legend="#{msgs.nuevoUsuario}" toggleable="true" collapsed="true"
+			id="filset" widgetVar="fil" toggleSpeed="100">
+
+			<h:form id="addfrm">
+                 <p:panel id="panelUser" header="#{msgs.insertar}">
+				<h:panelGrid id="Userdisplay" columns="3" cellpadding="4"
+					style="margin:0 auto;">
+					
+					<h:outputText value="" />
+					<h:inputHidden value="#{controllerbean.usuario.idusuario}" />
+					<h:outputText value="" />
+
+		<h:outputLabel for="nomusuario" value="#{msgs.usuario} *" />
+						<p:inputText id="nomusuario"
+							value="#{controllerbean.usuario.nombreus}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="nomusuario">
+						</p:inputText>
+						<p:message for="nomusuario" display="icon" 
+							showSummary="false" />
+							
+							<h:outputLabel for="password" value="#{msgs.password} *" />
+						<h:inputSecret id="password"
+							value="#{controllerbean.usuario.password}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="password">
+						</h:inputSecret>
+						<p:message for="password" display="icon" 
+							showSummary="false" />
+
+
+					<h:outputText value="#{msgs.facultad}" />
+					<h:selectOneMenu value="#{controllerbean.usuario.idfacultad}"
+						style="font-weight:bold">
+						<f:selectItems value="#{facultadbean.facultadItems}" />
+					</h:selectOneMenu>
+					<h:outputText value="" />
+					
+					<h:outputText value="#{msgs.rol}" />
+					<h:selectOneMenu value="#{controllerbean.usuario.codrol}"
+						style="font-weight:bold">
+						<f:selectItems value="#{rolbean.rolItems}" />
+					</h:selectOneMenu>
+					<h:outputText value="" />
+
+
+					<p:commandButton action="#{usuariobean.addUsuario()}"
+						value="#{msgs.insertar}"  update="panelUser">
+						<f:setPropertyActionListener value="#{controllerbean.usuario}"
+							target="#{usuariobean.usuario}" />
+					</p:commandButton>
+
+				</h:panelGrid>
+				
+				</p:panel>
+			</h:form>
+		</p:fieldset>
+	
+	
+	
+	
+		<h:form id="formdatatable">
+			<div align="center" style="padding-top: 0">
+				
+
+
+				<!-- Programacion del Datatable	 -->
+				<p:dataTable value="#{usuariobean.allUsuario}" var="usuario"
+					rows="20" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" id="tableUsuario">
+					<f:facet name="header">
+						<h:outputText value="#{msgs.listadousuario}" />
+					</f:facet>
+
+					<p:column sortBy="#{usuario.nombreus}"
+						filterBy="#{usuario.nombreus}" filterEvent="onkeyup"
+						label="username">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.usuario}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{usuario.nombreus}" id="columnusername" />
+						</div>
+					</p:column>
+
+					
+
+					<p:column sortBy="#{usuario.facultad.nombfacultad}"
+						filterBy="#{usuario.facultad.nombfacultad}" filterEvent="onkeyup"
+						label="#{msgs.facultad}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.facultad}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{usuario.facultad.nombfacultad}" id="columnidfacultad" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{usuario.rol.tiporol}" filterBy="#{usuario.rol.tiporol}"
+						filterEvent="onkeyup" label="idrol">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.rol}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{usuario.rol.tiporol}" id="columnidrol" />
+						</div>
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.modificar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="editlink" action="modificarUsuario"
+								oncomplete="usuarioDialogUpdate.show()" icon="ui-icon-update"
+								title="#{msgs.modificar}">
+								<f:setPropertyActionListener value="#{usuario}"
+									target="#{controllerbean.usuario}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="editlink" value="#{msgs.modificar}" />
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.eliminar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="deletelink" 
+								oncomplete="usuarioDialogDelete.show()" icon="ui-icon-trash"
+								update=":formdelete:eliminardialog" title="#{msgs.eliminar}"> 
+								<f:setPropertyActionListener value="#{usuario}"
+									target="#{usuariobean.usuario}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="deletelink" value="#{msgs.eliminar}" />
+					</p:column>
+					
+			</p:dataTable>
+			</div>
+		</h:form>
+		
+		<p:dialog appendToBody="true"
+			header="#{msgs.eliminar} #{usuariobean.usuario.nombreus}"
+			severity="alert" widgetVar="usuarioDialogDelete">
+			<h:outputText value="#{msgs.estaseguro}" />
+			<h:form id="formdelete">
+				<h:panelGrid id="eliminardialog" columns="4">
+					<h:inputHidden value="#{usuariobean.usuario.idusuario}" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<p:commandButton id="confirm" value="Si"
+						action="#{usuariobean.deleteUsuario()}"
+						onclick="usuarioDialogDelete.hide()" />
+
+					<p:commandButton id="decline" value="No"
+						onclick="usuarioDialogDelete.hide()" type="button" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+	</ui:define>
+</ui:composition>
+</html>
+

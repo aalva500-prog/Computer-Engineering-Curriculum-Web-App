@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+<h:head>
+	<title>Disciplina</title>
+	<meta http-equiv="keywords" content="enter,your,keywords,here" />
+	<meta http-equiv="description"
+		content="A short description of this page." />
+	<meta http-equiv="content-type" content="text/html; charset=ISO-8859-1" />
+	<style>
+.barsearch {
+	height: 14px;
+	width: 100px;
+}
+
+.barsearchbutton {
+	border-width: 1px;
+	background-color: #{
+	a4jSkin.generalBackgroundColor
+}
+;
+}
+</style>
+</h:head>
+<ui:composition template="../templates/template.xhtml">
+	<ui:define name="ibody">
+
+		<p:fieldset legend="#{msgs.nuevadisc}" toggleable="true"
+			collapsed="true" id="filset" widgetVar="fil" toggleSpeed="100">
+
+			<h:form>
+
+				<p:panel id="paneldisciplina" header="#{msgs.insertar}">
+					<h:panelGrid id="discidisplay" columns="3">
+
+						<h:outputLabel for="nombdisciplina" value="#{msgs.disciplina} *" />
+						<p:inputText id="nombdisciplina"
+							value="#{disciplinabean.disciplina.nombredisciplin}"
+							required="true" style="font-weight:bold"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Nombdisciplina">
+
+						</p:inputText>
+
+						<p:message for="nombdisciplina" display="icon" showDetail="mmmm"
+							showSummary="false" />
+
+
+
+						<h:outputLabel for="jefedisciplina" value="#{msgs.jefedisciplin} *" />
+						<p:inputText id="jefedisciplina"
+							value="#{disciplinabean.disciplina.jefedisciplin}"
+							required="true" style="font-weight:bold"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Jefedisciplina">
+
+						</p:inputText>
+
+						<p:message for="jefedisciplina" display="icon" showDetail="mmmm"
+							showSummary="false" />
+
+
+						<h:outputText value="#{msgs.canthoras}" />
+						<p:spinner value="#{disciplinabean.disciplina.canthorastotales}"
+							min="0" />
+
+
+
+					</h:panelGrid>
+
+					<p:commandButton action="#{disciplinabean.addDisciplina()}"
+						update="paneldisciplina" value="#{msgs.insertar}" />
+				</p:panel>
+			</h:form>
+		</p:fieldset>
+
+		<h:form id="formdatatable">
+			<div align="center" style="padding-top: 0">
+
+
+				<!-- Programacion del Datatable	 -->
+				<p:dataTable value="#{disciplinabean.allDisciplina}"
+					var="disciplina" rows="20" paginator="true"
+					paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+					rowsPerPageTemplate="5,10,15" id="tableDisciplina">
+					<f:facet name="header">
+						<h:outputText value="#{msgs.listadodisciplina}" />
+					</f:facet>
+
+				<p:column sortBy="#{disciplina.nombredisciplin}"
+						filterBy="#{disciplina.nombredisciplin}" filterEvent="onkeyup"
+						label="#{msgs.nombredisciplin}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.nombredisciplin}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{disciplina.nombredisciplin}"
+								id="columnnombredisciplin" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{disciplina.jefedisciplin}"
+						filterBy="#{disciplina.jefedisciplin}" filterEvent="onkeyup"
+						label="#{msgs.jefedisciplin}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.jefedisciplin}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{disciplina.jefedisciplin}"
+								id="columnjefedisciplin" />
+						</div>
+					</p:column>
+
+					<p:column sortBy="#{disciplina.canthorastotales}"
+						filterBy="#{disciplina.canthorastotales}" filterEvent="onkeyup"
+						label="#{msgs.canthorastotales}">
+						<f:facet name="header">
+							<h:outputText value="#{msgs.canthorastotales}" />
+						</f:facet>
+						<div align="center">
+							<h:outputText value="#{disciplina.canthorastotales}"
+								id="columncanthorastotales" />
+						</div>
+					</p:column>
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.modificar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="editlink" action="modificardisciplina"
+								oncomplete="disciplinaDialogUpdate.show()" icon="ui-icon-update"
+								title="#{msgs.modificar}">
+								<f:setPropertyActionListener value="#{disciplina}"
+									target="#{controllerbean.disciplina}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="editlink" value="#{msgs.modificar}" />
+					</p:column>
+
+
+					<p:column>
+						<div align="center">
+							<f:facet name="header">	#{msgs.eliminar}</f:facet>
+						</div>
+						<div align="center">
+							<p:commandButton id="deletelink"
+								oncomplete="disciplinaDialogDelete.show()" icon="ui-icon-trash"
+							update=":formdelete:eliminardialog"	title="#{msgs.eliminar}">
+								<f:setPropertyActionListener value="#{disciplina}"
+									target="#{disciplinabean.disciplina}" />
+							</p:commandButton>
+						</div>
+						<p:tooltip for="deletelink" value="#{msgs.eliminar}" />
+					</p:column>
+
+				</p:dataTable>
+			</div>
+		</h:form>
+
+
+		<p:dialog appendToBody="true"
+			header="#{msgs.eliminar} #{disciplinabean.disciplina.nombredisciplin}"
+			severity="alert" widgetVar="disciplinaDialogDelete">
+			<h:outputText value="#{msgs.estaseguro}" />
+			<h:form id="formdelete">
+				<h:panelGrid id="eliminardialog" columns="3">
+					<h:inputHidden value="#{disciplinabean.disciplina.coddisciplina}" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<h:outputText value="" />
+					<p:commandButton id="confirm" value="Si"
+						action="#{disciplinabean.deleteDisciplina()}"
+						onclick="disciplinaDialogDelete.hide()" />
+
+					<p:commandButton id="decline" value="No"
+						onclick="disciplinaDialogDelete.hide()" type="button" />
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
+	</ui:define>
+</ui:composition>
+</html>
+

@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="../templates/template.xhtml">
+		<ui:define name="ibody">
+
+
+
+			<h:form id="modificartfrm">
+                 <p:panel id="panelmodUser" header="#{msgs.modUsuario}">
+				<h:panelGrid id="Userdisplay" columns="3" cellpadding="4"
+					style="margin:0 auto;">
+					
+					<h:outputText value="" />
+					<h:inputHidden value="#{controllerbean.usuario.idusuario}" />
+					<h:outputText value="" />
+
+		<h:outputLabel for="nomusuario" value="#{msgs.usuario} *" />
+						<p:inputText id="nomusuario"
+							value="#{controllerbean.usuario.nombreus}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="nomusuario">
+						</p:inputText>
+						<p:message for="nomusuario" display="icon" 
+							showSummary="false" />
+							
+							<h:outputLabel for="password" value="#{msgs.password} *" />
+						<h:inputSecret id="password"
+							value="#{controllerbean.usuario.password}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="password">
+						</h:inputSecret>
+						<p:message for="password" display="icon" 
+							showSummary="false" />
+
+
+					<h:outputText value="#{msgs.facultad}" />
+					<h:selectOneMenu value="#{controllerbean.usuario.idfacultad}"
+						style="font-weight:bold">
+						<f:selectItems value="#{facultadbean.facultadItems}" />
+					</h:selectOneMenu>
+					<h:outputText value="" />
+					
+					<h:outputText value="#{msgs.rol}" />
+					<h:selectOneMenu value="#{controllerbean.usuario.codrol}"
+						style="font-weight:bold">
+						<f:selectItems value="#{rolbean.rolItems}" />
+					</h:selectOneMenu>
+					<h:outputText value="" />
+
+
+					<p:commandButton action="#{usuariobean.updateUsuario()}"
+						value="#{msgs.Actualizar}"  update="panelmodUser">
+						<f:setPropertyActionListener value="#{controllerbean.usuario}"
+							target="#{usuariobean.usuario}" />
+					</p:commandButton>
+
+				</h:panelGrid>
+				
+				</p:panel>
+			</h:form>
+
+
+
+
+
+
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

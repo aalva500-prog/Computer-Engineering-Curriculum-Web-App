@@ -1,0 +1,87 @@
+<?xml version="1.0"?> 
+<pages login-view-id="/pages/login.xhtml" xmlns="http://jboss.com/products/seam/pages" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+ 	xmlns:s="http://jboss.com/products/seam/taglib"
+	xsi:schemaLocation="http://jboss.com/products/seam/pages http://jboss.com/products/seam/pages-2.1.xsd"> 
+	<!-- ************* PAGINA QUE REQUIEREN LOGUEO ******************* -->
+
+<page login-required="true" view-id="/pages/updateasignatura.xhtml" />
+
+<page login-required="true" view-id="/pages/insertasignatura.xhtml" />
+
+<page login-required="true" view-id="/pages/updatecarrera.xhtml" />
+
+<page login-required="true" view-id="/pages/insertcarrera.xhtml" />
+
+<page login-required="true" view-id="/pages/updatecurriculo.xhtml" />
+
+<page login-required="true" view-id="/pages/insertcurriculo.xhtml" />
+
+<page login-required="true" view-id="/pages/updatedisciplina.xhtml" />
+
+<page login-required="true" view-id="/pages/insertdisciplina.xhtml" />
+
+<page login-required="true" view-id="/pages/updateevaluacion.xhtml" />
+
+<page login-required="true" view-id="/pages/insertevaluacion.xhtml" />
+
+<page login-required="true" view-id="/pages/updatefacultad.xhtml" />
+
+<page login-required="true" view-id="/pages/insertfacultad.xhtml" />
+
+<page login-required="true" view-id="/pages/updateplandeestudio.xhtml" />
+
+<page login-required="true" view-id="/pages/insertplandeestudio.xhtml" />
+
+<page login-required="true" view-id="/pages/updaterol.xhtml" />
+
+<page login-required="true" view-id="/pages/insertrol.xhtml" />
+
+<page login-required="true" view-id="/pages/updateusuario.xhtml" />
+
+<page login-required="true" view-id="/pages/insertusuario.xhtml" />
+
+	            <!-- *************              FIN            ******************* --> 
+	<page view-id="/*"> 
+		<navigation from-action="#{identity.logout}"> 
+			<redirect view-id="/pages/index.xhtml"> 
+</redirect> 
+		</navigation> 
+	</page> 
+	<page action="#{identity.isLoggedIn}" view-id="/pages/index.xhtml"> 
+		<navigation from-action="#{identity.isLoggedIn}"> 
+			<rule if-outcome="true"> 
+				<redirect view-id="/pages/home.xhtml"> 
+</redirect> 
+			</rule> 
+		</navigation> 
+		<navigation> 
+			<rule if="#{identity.loggedIn}"> 
+				<redirect view-id="/pages/home.xhtml" /> 
+			</rule> 
+		</navigation> 
+	</page> 
+	<page action="#{identity.isLoggedIn}" view-id="/pages/login.xhtml"> 
+		<navigation from-action="#{identity.isLoggedIn}"> 
+			<rule if-outcome="true"> 
+				<redirect view-id="/pages/home.xhtml"> 
+</redirect> 
+			</rule> 
+		</navigation> 
+		<navigation> 
+			<rule if="#{identity.loggedIn}"> 
+				<redirect view-id="/pages/home.xhtml" /> 
+			</rule> 
+		</navigation> 
+	</page> 
+	 
+	<exception class="org.jboss.seam.security.AuthorizationException"> 
+		<redirect view-id="/pages/index.xhtml" /> 
+	</exception> 
+	<exception class="org.jboss.seam.security.NotLoggedInException"> 
+		<redirect view-id="/pages/index.xhtml" /> 
+	</exception> 
+	<exception class="javax.faces.application.ViewExpiredException"> 
+		<redirect view-id="/pages/index.xhtml" /> 
+	</exception> 
+</pages> 

@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>	  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+	  <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:p="http://primefaces.org/ui">
+	  	<h:head>
+	  		<title>Mi pagina de Inicio</title>
+	  		<meta http-equiv="keywords" content="enter,your,keywords,here" />
+  		<meta http-equiv="description"
+	  			content="A short description of this page." />
+	  		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+	  		<!--<link rel="stylesheet" type="text/css" href="styles.css">-->
+	  	</h:head>
+	  	<body>
+	  		<p>
+			<ui:composition template="../templates/template.xhtml">
+			<ui:define name="main">
+<h:form>
+	<div id="buttons">
+      <h:commandLink value="#{msgs.inicio}" title="Inicio" styleClass="but" action="inicio"  ></h:commandLink>
+     </div>
+    </h:form>
+
+     <h:form>
+     <h:panelGrid id="carrdisplay" columns="2" cellpadding="4"
+					style="margin:0 auto;">
+     <tr>
+       <td>
+         <p:commandLink action="asignaturalist" styleClass=" active" value= "#{msgs.listadoasignatura}"></p:commandLink>
+		  </td>
+		</tr>
+
+     <tr>
+       <td>
+         <p:commandLink action="carreralist" styleClass=" active" value="#{msgs.listadocarrera}"></p:commandLink>
+		  </td>
+		</tr>
+    <tr>
+       <td>
+         <p:commandLink action="disciplinalist" styleClass=" active" value="#{msgs.listadodisciplina}"></p:commandLink>
+		  </td>
+		</tr>
+    
+
+     <tr>
+       <td>
+         <p:commandLink action="facultadlist" styleClass=" active" value="#{msgs.listadofacultad}"></p:commandLink>
+		  </td>
+		</tr>
+
+     <tr>
+       <td>
+         <p:commandLink action="plandeestudiolist" styleClass=" active" value="#{msgs.listplanEst}"></p:commandLink>
+		  </td>
+		</tr>
+
+     <tr>
+       <td>
+         <p:commandLink action="usuariolist" styleClass=" active" value="#{msgs.listadousuario}"></p:commandLink>
+		  </td>
+		</tr>
+		<tr>
+       <td>
+         <p:commandLink action="reportes" styleClass=" active" value="#{msgs.reportes}"></p:commandLink>
+		  </td>
+		</tr>
+</h:panelGrid>
+     </h:form>
+	  </ui:define>
+	 </ui:composition>
+
+	  	</p>
+	  	</body>
+	  </html>
+

@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="../templates/template.xhtml">
+		<ui:define name="ibody">
+
+
+			<h:form id="modiffrm">
+				<p:panel id="panelmodifi" header="#{msgs.modPlan}">
+					<h:panelGrid id="modplandisplay" columns="3" cellpadding="4"
+						style="margin:0 auto;">
+
+
+						<h:outputText value="" />
+						<h:inputHidden value="#{controllerbean.plandeestudio.codplanest}" />
+						<h:outputText value="" />
+
+
+
+
+						<h:outputText value="#{msgs.plandeestudio} *" />
+						<p:inputText id="nomplan"
+							value="#{controllerbean.plandeestudio.nombreplan}"
+							required="true" requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="Nomplan">
+						</p:inputText>
+						<p:message for="nomplan" display="icon" />
+
+
+						<h:outputText value="#{msgs.cantperiodos}" />
+						<p:spinner value="#{controllerbean.plandeestudio.cantperiodos}"
+							min="0"  max="3"/>
+						<h:outputText value="" />
+
+
+						<h:outputText value="#{msgs.cantannos}" />
+						<p:spinner value="#{controllerbean.plandeestudio.cantannos}"
+							min="0"  max="6"/>
+						<h:outputText value="" />
+
+
+						<h:outputText value="#{msgs.carrera}" />
+						<h:selectOneMenu
+							value="#{controllerbean.plandeestudio.codcarrera}"
+							style="font-weight:bold">
+							<f:selectItems value="#{carrerabean.carreraItems}" />
+						</h:selectOneMenu>
+						<h:outputText value="" />
+
+
+
+
+					</h:panelGrid>
+
+					<p:commandButton
+						action="#{plandeestudiobean.updatePlandeestudio()}"
+						value="#{msgs.Actualizar}" update="panelmodifi">
+						<f:setPropertyActionListener
+							value="#{controllerbean.plandeestudio}"
+							target="#{plandeestudiobean.plandeestudio}" />
+					</p:commandButton>
+				</p:panel>
+			</h:form>
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

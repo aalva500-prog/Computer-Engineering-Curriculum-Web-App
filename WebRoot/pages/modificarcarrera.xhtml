@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head></h:head>
+<body>
+	<ui:composition template="../templates/template.xhtml">
+		<ui:define name="ibody">
+
+
+
+			<h:form id="modificartfrm">
+                 <p:panel id="panelmodcarrera" header="modificar">
+				<h:panelGrid id="carrdisplay" columns="3" cellpadding="4"
+					style="margin:0 auto;">
+					
+					<h:outputText value="" />
+					<h:inputHidden value="#{controllerbean.carrera.codcarrera}" />
+					<h:outputText value="" />
+
+		<h:outputLabel for="nomcarrera" value="#{msgs.carrera} *" />
+						<p:inputText id="nomcarrera"
+							value="#{controllerbean.carrera.nombcarrera}" required="true"
+							requiredMessage="#{msgs.debe}"
+							onkeypress="return permite(event,'car');" label="nomcarrera">
+						</p:inputText>
+						<p:message for="nomcarrera" display="icon" 
+							showSummary="false" />
+
+
+					<h:outputText value="#{msgs.facultad}" />
+					<h:selectOneMenu value="#{controllerbean.carrera.idfacultad}"
+						style="font-weight:bold">
+						<f:selectItems value="#{facultadbean.facultadItems}" />
+					</h:selectOneMenu>
+					<h:outputText value="" />
+
+
+					<p:commandButton action="#{carrerabean.updateCarrera()}"
+						value="#{msgs.Actualizar}"  update="panelmodcarrera">
+						<f:setPropertyActionListener value="#{controllerbean.carrera}"
+							target="#{carrerabean.carrera}" />
+					</p:commandButton>
+
+				</h:panelGrid>
+				
+				</p:panel>
+			</h:form>
+
+
+
+
+
+
+
+
+		</ui:define>
+	</ui:composition>
+</body>
+</html>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:" SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules::0" NAME="item" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="inicio::#pages#index.xhtml" NAME="output"
+    PATH="/pages/index.xhtml" TARGET="rules:#pages#index.xhtml"
+    TITLE="inicio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="asignaturalist::#pages#asignaturalist.xhtml"
+    NAME="output1" PATH="/pages/asignaturalist.xhtml"
+    TARGET="rules:#pages#asignaturalist.xhtml" TITLE="asignaturalist" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="carreralist::#pages#carreralist.xhtml"
+    NAME="output2" PATH="/pages/carreralist.xhtml"
+    TARGET="rules:#pages#carreralist.xhtml" TITLE="carreralist" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="disciplinalist::#pages#disciplinalist.xhtml"
+    NAME="output4" PATH="/pages/disciplinalist.xhtml"
+    TARGET="rules:#pages#disciplinalist.xhtml" TITLE="disciplinalist" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="facultadlist::#pages#facultadlist.xhtml"
+    NAME="output6" PATH="/pages/facultadlist.xhtml"
+    TARGET="rules:#pages#facultadlist.xhtml" TITLE="facultadlist" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="plandeestudiolist::#pages#plandeestudiolist.xhtml"
+    NAME="output7" PATH="/pages/plandeestudiolist.xhtml"
+    TARGET="rules:#pages#plandeestudiolist.xhtml"
+    TITLE="plandeestudiolist" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="usuariolist::#pages#usuariolist.xhtml"
+    NAME="output9" PATH="/pages/usuariolist.xhtml"
+    TARGET="rules:#pages#usuariolist.xhtml" TITLE="usuariolist" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="modificarcarrera::#pages#modificarcarrera.xhtml" NAME="output10"
+    PATH="/pages/modificarcarrera.xhtml"
+    SHAPE="84,160,440,160,440,168,503,168"
+    TARGET="rules:#pages#modificarcarrera.xhtml"
+    TITLE="modificarcarrera" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="modificarUsuario::#pages#ModificarUsuario.xhtml" NAME="output11"
+    PATH="/pages/ModificarUsuario.xhtml"
+    TARGET="rules:#pages#ModificarUsuario.xhtml"
+    TITLE="modificarUsuario" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="modificarfacultad::#pages#modificarfacultad.xhtml"
+    NAME="output12" PATH="/pages/modificarfacultad.xhtml"
+    TARGET="rules:#pages#modificarfacultad.xhtml"
+    TITLE="modificarfacultad" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="modificardisciplina::#pages#modificardisciplina.xhtml"
+    NAME="output13" PATH="/pages/modificardisciplina.xhtml"
+    TARGET="rules:#pages#modificardisciplina.xhtml"
+    TITLE="modificardisciplina" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="modificarplandeestudio::#pages#modificarplandeestudio.xhtml"
+    NAME="output14" PATH="/pages/modificarplandeestudio.xhtml"
+    TARGET="rules:#pages#modificarplandeestudio.xhtml"
+    TITLE="modificarplandeestudio" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT
+    ID="modificarasignatura::#pages#modificarasignatura.xhtml"
+    NAME="output15" PATH="/pages/modificarasignatura.xhtml"
+    TARGET="rules:#pages#modificarasignatura.xhtml"
+    TITLE="modificarasignatura" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="reportes::#pages#reportes.xhtml"
+    NAME="output16" PATH="/pages/reportes.xhtml"
+    TARGET="rules:#pages#reportes.xhtml" TITLE="reportes" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#pages#index.xhtml" PATH="/pages/index.xhtml"
+  SHAPE="304,33,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#usuariolist.xhtml"
+  PATH="/pages/usuariolist.xhtml" SHAPE="304,1329,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#carreralist.xhtml"
+  PATH="/pages/carreralist.xhtml" SHAPE="304,545,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#plandeestudiolist.xhtml"
+  PATH="/pages/plandeestudiolist.xhtml" SHAPE="304,1105,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#facultadlist.xhtml"
+  PATH="/pages/facultadlist.xhtml" SHAPE="304,993,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#asignaturalist.xhtml"
+  PATH="/pages/asignaturalist.xhtml" SHAPE="304,433,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#disciplinalist.xhtml"
+  PATH="/pages/disciplinalist.xhtml" SHAPE="304,769,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pages#modificarcarrera.xhtml"
+  PATH="/pages/modificarcarrera.xhtml" SHAPE="504,160,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#modificarfacultad.xhtml"
+  PATH="/pages/modificarfacultad.xhtml" SHAPE="512,208,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#modificardisciplina.xhtml"
+  PATH="/pages/modificardisciplina.xhtml" SHAPE="512,256,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#modificarplandeestudio.xhtml"
+  PATH="/pages/modificarplandeestudio.xhtml" SHAPE="512,296,50,25"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#modificarasignatura.xhtml"
+  PATH="/pages/modificarasignatura.xhtml" SHAPE="524,352,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#reportes.xhtml"
+  PATH="/pages/reportes.xhtml" SHAPE="583,404,0,0"
+  model-entity="JSFProcessGroup" persistent="true"/>
+ <PROCESS-ITEM NAME="rules:#pages#ModificarUsuario.xhtml"
+  PATH="/pages/ModificarUsuario.xhtml" SHAPE="304,657,0,0" model-entity="JSFProcessGroup"/>
+</PROCESS>
