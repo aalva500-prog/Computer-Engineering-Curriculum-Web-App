@@ -16,11 +16,10 @@ The application meets the following requirements:
 * [x] Multilanguage (English and Spanish).
 
 The application allows the following reports:
-* [x] Show the grid of subjects by year, indicating the corresponding precedents.
-* [x] Show the program of a discipline including the list of the subjects that make it up.
-* [x] Show the analytical program of each subject.
-* [x] Show the chain of direct or indirect preceding subjects of a given subject.
-* [x] Show the chain of subjects that have a direct or indirect precedent to a given subject.
-* [x] Show a conceptual map with the fundamental themes and concepts of a given subject.
-* [x] Show a map with the precedence of contents between subjects of the career.
-
+* [x] Shows the grid of subjects by year, indicating the corresponding precedents.
+* [x] Shows the program of a discipline including the list of the subjects that make it up.
+* [x] Shows the analytical program of each subject.
+* [x] Shows the chain of direct or indirect preceding subjects of a given subject.
+* [x] Shows the chain of subjects that have a direct or indirect precedent to a given subject.
+* [x] Shows a conceptual map with the fundamental themes and concepts of a given subject.
+* [x] Shows a map with the precedence of contents between subjects of the career.
